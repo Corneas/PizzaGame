@@ -16,4 +16,12 @@ public class BulletMove : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         Destroy(gameObject, 3f);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pizza") || other.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

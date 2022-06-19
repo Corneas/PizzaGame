@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     private GameObject bulletPre = null;
     [SerializeField]
+    private GameObject fireballPre = null;
+    [SerializeField]
     private Transform bulletPos = null;
 
     private BulletType bulletType = null;
@@ -24,6 +26,11 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         ChangeToppingType();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            FireBall();
+        }
     }
 
     void ChangeToppingType()
@@ -61,6 +68,13 @@ public class PlayerAttack : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    void FireBall()
+    {
+        GameObject fireball = Instantiate(fireballPre, bulletPos);
+        fireball.transform.SetParent(null);
+        Destroy(fireball, 3f);
     }
 
 }

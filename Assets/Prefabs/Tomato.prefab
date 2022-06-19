@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8116461038537298381}
   - component: {fileID: 8108728352131120765}
   - component: {fileID: 3007364005467219917}
+  - component: {fileID: 4144495102830811172}
   m_Layer: 0
   m_Name: Tomato
   m_TagString: Tomato
@@ -95,3 +96,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+--- !u!135 &4144495102830811172
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8130623073676028489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.04649967
+  m_Center: {x: 0, y: -0.0000000037252903, z: 0}

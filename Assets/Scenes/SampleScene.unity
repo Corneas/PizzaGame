@@ -438,7 +438,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &324177743
 Transform:
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPre: {fileID: 77993913108532801, guid: 676d7732b68fbb9479a30745c877317a, type: 3}
-  fireballPre: {fileID: 0}
+  fireballPre: {fileID: 9157548717583771580, guid: e5a950ea322fbc145991111ac66395f7, type: 3}
   bulletPos: {fileID: 1733052746}
 --- !u!114 &324177746
 MonoBehaviour:
@@ -1067,7 +1067,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD604\uC7AC \uC801 \uC218 : 1"
+  m_text: "\uD604\uC7AC \uC801 \uC218 : 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4cd63b7fb676a940ac8a46b5c170468, type: 2}
   m_sharedMaterial: {fileID: 5020404026955836975, guid: c4cd63b7fb676a940ac8a46b5c170468, type: 2}

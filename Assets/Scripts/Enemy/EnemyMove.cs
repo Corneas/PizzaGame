@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private float moveSpeed = 5f;
+
+    private GameObject target;
+
     void Start()
     {
-        
+        target = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.LookAt(target.transform);
+        transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
     }
 }

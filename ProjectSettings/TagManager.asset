@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Cheese
-  - Onion
-  - Tomato
-  - Pizza
-  - Wall
-  - FireBall
+  - BULLET
+  - BARREL
+  - PLAYER
+  - PUNCH
+  - MONSTER
+  - HPBAR
   layers:
   - Default
   - TransparentFX
@@ -17,11 +17,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Wall
   - 
   - 
-  - 
-  - 
+  - BARREL
+  - MONSTER BODY
+  - MONSTER PUNCH
   - 
   - 
   - 

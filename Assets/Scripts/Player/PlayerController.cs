@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        
+
         Move();
         CameraRotate();
     }
@@ -33,8 +35,17 @@ public class PlayerController : MonoBehaviour
 
         Vector3 dir = Vector3.right * h + Vector3.forward * v;
         dir = Camera.main.transform.TransformDirection(dir);
+        dir.y = 0f;
         dir.Normalize();
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed *= 1.5f;
+        }
+        else
+        {
+            moveSpeed = 10f;
+        }
         transform.Translate(dir * moveSpeed * Time.deltaTime);
     }
 

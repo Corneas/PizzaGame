@@ -158,3 +158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  pizza: {fileID: 919132149155446097, guid: a0346759146c5934cbdd5ec73a404a5e, type: 3}

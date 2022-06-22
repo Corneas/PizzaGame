@@ -5,14 +5,14 @@ using UnityEngine;
 public enum ToppingType
 {
     Cheese = 0,
-    Onion,
+    Pepperoni,
     Tomato,
 }
 
 public class BulletType : MonoBehaviour
 {
     public GameObject cheesePre = null;
-    public GameObject onionPre = null;
+    public GameObject pepperoniPre = null;
     public GameObject tomatoPre = null;
     public ToppingType curToppingType = 0;
 }

@@ -18,12 +18,14 @@ public class EnemyMove : MonoBehaviour
 
     private GameManager gameManager = null;
     private MeshRenderer meshRenderer = null;
+    private PlayerAttack playerAttack = null;
 
     void Start()
     {
         target = GameObject.Find("PizzaTarget");
         gameManager = FindObjectOfType<GameManager>();
         meshRenderer = GetComponentInChildren<MeshRenderer>();
+        playerAttack = FindObjectOfType<PlayerAttack>();
     }
 
     void Update()
@@ -33,10 +35,14 @@ public class EnemyMove : MonoBehaviour
             transform.LookAt(target.transform);
             transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
         }
-
+        
         if(hp <= 0)
         {
             meshRenderer.material = material;
+            if (playerAttack.isTomatoSkillOn)
+            {
+                Bake();
+            }
         }
     }
 

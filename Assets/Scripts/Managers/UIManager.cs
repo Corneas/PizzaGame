@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
             case ToppingType.Cheese:
                 toppingIcon.sprite = toppingImage[0];
                 break;
-            case ToppingType.Onion:
+            case ToppingType.Pepperoni:
                 toppingIcon.sprite = toppingImage[1];
                 break;
             case ToppingType.Tomato:

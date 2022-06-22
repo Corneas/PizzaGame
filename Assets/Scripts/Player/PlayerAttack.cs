@@ -10,13 +10,14 @@ public class PlayerAttack : MonoBehaviour
     private GameObject fireballPre = null;
     [SerializeField]
     private Transform bulletPos = null;
+    [SerializeField]
+    private GameObject turret = null;
     private float bulletDelay = 0.1f;
-    public float skillDelay { private set; get; } = 0;
+    public float skillDelay { private set; get; } = 3f;
     public float curDelay { private set; get; } = 0;
 
     private BulletType bulletType = null;
     private UIManager uIManager = null;
-    private EnemyMove enemyMove = null;
 
     public bool isTomatoSkillOn = false;
 
@@ -24,7 +25,6 @@ public class PlayerAttack : MonoBehaviour
     {
         bulletType = GetComponent<BulletType>();
         uIManager = FindObjectOfType<UIManager>();
-        enemyMove = FindObjectOfType<EnemyMove>();
     }
 
     void Start()
@@ -51,21 +51,21 @@ public class PlayerAttack : MonoBehaviour
         {
             bulletPre = bulletType.cheesePre;
             bulletType.curToppingType = ToppingType.Cheese;
-            skillDelay = 5f;
+            skillDelay = 3f;
             Debug.Log("토핑 변경 (치즈)");
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            bulletPre = bulletType.onionPre;
-            bulletType.curToppingType = ToppingType.Onion;
-            skillDelay = 0f;//30f;
-            Debug.Log("토핑 변경 (양파)");
+            bulletPre = bulletType.pepperoniPre;
+            bulletType.curToppingType = ToppingType.Pepperoni;
+            skillDelay = 3f;//30f;
+            Debug.Log("토핑 변경 (페퍼로니)");
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             bulletPre = bulletType.tomatoPre;
             bulletType.curToppingType = ToppingType.Tomato;
-            skillDelay = 0f;//60f;
+            skillDelay = 20f;//60f;
             Debug.Log("토핑 변경 (토마토)");
         }
     }
@@ -109,7 +109,7 @@ public class PlayerAttack : MonoBehaviour
                     StartCoroutine(CheeseSkill());
                 }
             }
-            if (bulletType.curToppingType == ToppingType.Onion)
+            if (bulletType.curToppingType == ToppingType.Pepperoni)
             {
                 if (curDelay >= skillDelay)
                 {
@@ -132,31 +132,29 @@ public class PlayerAttack : MonoBehaviour
     
     IEnumerator CheeseSkill()
     {
-        for(int i = -30; i < 60; i += 30)
+        for(int j = 0; j < 5; j++)
         {
-            GameObject bullet = Instantiate(bulletPre, bulletPos);
-            bullet.transform.Rotate(new Vector3(0, i, 0));
-            bullet.transform.SetParent(null);
-            yield return new WaitForSeconds(0.05f);
+            for (int i = -30; i < 60; i += 18)
+            {
+                GameObject bullet = Instantiate(bulletPre, bulletPos);
+                bullet.transform.Rotate(new Vector3(0, i, 0));
+                bullet.transform.SetParent(null);
+                yield return new WaitForSeconds(0.05f);
+            }
         }
         yield break;
     }
 
     IEnumerator OnionSkill()
     {
-        bulletDelay = 0.05f;
-        yield return new WaitForSeconds(10f);
-        bulletDelay = 0.1f;
+        GameObject turretObj = Instantiate(turret, transform);
+        yield return new WaitForSeconds(5f);
         yield break;
     }
 
     IEnumerator TomatoSkill()
     {
-        if(enemyMove.hp <= 0)
-        {
-            enemyMove.Bake();
-        }
-        yield return new WaitForSeconds(10f);
+
         yield break;
     }
 

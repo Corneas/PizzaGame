@@ -11,16 +11,19 @@ public class EnemyMove : MonoBehaviour
     private GameObject target;
     private GameObject pizzaObj;
 
-    private int cheeseTopping = 0;
-    private int tomatoTopping = 0;
-    private int onionTopping = 0;
+    [SerializeField]
+    private Material material;
+
+    private int hp = 10;
 
     private GameManager gameManager = null;
+    private MeshRenderer meshRenderer = null;
 
     void Start()
     {
         target = GameObject.Find("PizzaTarget");
         gameManager = FindObjectOfType<GameManager>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
     void Update()
@@ -30,28 +33,28 @@ public class EnemyMove : MonoBehaviour
             transform.LookAt(target.transform);
             transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
         }
+
+        if(hp <= 0)
+        {
+            meshRenderer.material = material;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Cheese"))
+        if (other.gameObject.CompareTag("Topping"))
         {
-            cheeseTopping++;
-        }
-        if (other.gameObject.CompareTag("Tomato"))
-        {
-            tomatoTopping++;
-        }
-        if (other.gameObject.CompareTag("Onion"))
-        {
-            onionTopping++;
+            if(hp > 0)
+            {
+                hp--;
+            }
         }
 
         if (other.gameObject.CompareTag("FireBall"))
         {
             Destroy(gameObject);
             gameManager.curDoughCount--;
-            if(cheeseTopping >= 1 && tomatoTopping >= 1 && onionTopping >= 1)
+            if(hp <= 0) 
             {
                 pizzaObj = Instantiate(pizza, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
             }

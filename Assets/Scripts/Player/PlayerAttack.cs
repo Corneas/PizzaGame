@@ -28,10 +28,11 @@ public class PlayerAttack : MonoBehaviour
     {
         ChangeToppingType();
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(1))
         {
             FireBall();
         }
+        Skill();
     }
 
     void ChangeToppingType()
@@ -80,6 +81,47 @@ public class PlayerAttack : MonoBehaviour
             fireball.transform.SetParent(null);
             Destroy(fireball, 3f);
         }
+    }
+
+    void Skill()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (bulletType.curToppingType == ToppingType.Cheese)
+            {
+                StartCoroutine(CheeseSkill());
+            }
+            if (bulletType.curToppingType == ToppingType.Onion)
+            {
+                OnionSkill();
+            }
+            if (bulletType.curToppingType == ToppingType.Tomato)
+            {
+                TomatoSkill();
+            }
+        }
+    }
+    
+    IEnumerator CheeseSkill()
+    {
+        for(int i = -30; i < 60; i += 30)
+        {
+            GameObject bullet = Instantiate(bulletPre, bulletPos);
+            bullet.transform.Rotate(new Vector3(0, i, 0));
+            bullet.transform.SetParent(null);
+            yield return new WaitForSeconds(0.05f);
+        }
+        yield break;
+    }
+
+    void OnionSkill()
+    {
+
+    }
+
+    void TomatoSkill()
+    {
+
     }
 
 }

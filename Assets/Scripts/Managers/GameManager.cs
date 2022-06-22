@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
             randomSpawnPoint = Random.Range(0, doughSpawnPoint.Length);
             Instantiate(pizzaDough, doughSpawnPoint[randomSpawnPoint]);
             curDoughCount++;
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(5f);
         }
     }
 }

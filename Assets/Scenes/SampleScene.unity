@@ -534,7 +534,6 @@ MonoBehaviour:
   bulletPre: {fileID: 77993913108532801, guid: 676d7732b68fbb9479a30745c877317a, type: 3}
   fireballPre: {fileID: 9157548717583771580, guid: e5a950ea322fbc145991111ac66395f7, type: 3}
   bulletPos: {fileID: 1733052746}
-  playerObject: {fileID: 2001437372}
 --- !u!114 &324177746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,6 +2217,7 @@ MonoBehaviour:
   finishedPizzaText: {fileID: 1202950126}
   fireballText: {fileID: 453185035}
   doughCountText: {fileID: 1135562151}
+  skillCoolDownImage: {fileID: 1009403986}
   finishedPizza: 0
   fireballCount: 10
 --- !u!1 &1816024987

@@ -14,7 +14,7 @@ public class EnemyMove : MonoBehaviour
     [SerializeField]
     private Material material;
 
-    private int hp = 10;
+    public int hp { private set; get; } = 10;
 
     private GameManager gameManager = null;
     private MeshRenderer meshRenderer = null;
@@ -52,12 +52,17 @@ public class EnemyMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("FireBall"))
         {
-            Destroy(gameObject);
-            gameManager.curDoughCount--;
-            if(hp <= 0) 
-            {
-                pizzaObj = Instantiate(pizza, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
-            }
+            Bake();
+        }
+    }
+
+    public void Bake()
+    {
+        Destroy(gameObject);
+        gameManager.curDoughCount--;
+        if (hp <= 0)
+        {
+            pizzaObj = Instantiate(pizza, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
         }
     }
 }

@@ -10,13 +10,21 @@ public class PlayerAttack : MonoBehaviour
     private GameObject fireballPre = null;
     [SerializeField]
     private Transform bulletPos = null;
+    private float bulletDelay = 0.1f;
+    public float skillDelay { private set; get; } = 0;
+    public float curDelay { private set; get; } = 0;
 
     private BulletType bulletType = null;
     private UIManager uIManager = null;
+    private EnemyMove enemyMove = null;
+
+    public bool isTomatoSkillOn = false;
+
     private void Awake()
     {
         bulletType = GetComponent<BulletType>();
         uIManager = FindObjectOfType<UIManager>();
+        enemyMove = FindObjectOfType<EnemyMove>();
     }
 
     void Start()
@@ -33,6 +41,8 @@ public class PlayerAttack : MonoBehaviour
             FireBall();
         }
         Skill();
+
+        curDelay += Time.deltaTime;
     }
 
     void ChangeToppingType()
@@ -41,18 +51,21 @@ public class PlayerAttack : MonoBehaviour
         {
             bulletPre = bulletType.cheesePre;
             bulletType.curToppingType = ToppingType.Cheese;
+            skillDelay = 5f;
             Debug.Log("토핑 변경 (치즈)");
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             bulletPre = bulletType.onionPre;
             bulletType.curToppingType = ToppingType.Onion;
+            skillDelay = 0f;//30f;
             Debug.Log("토핑 변경 (양파)");
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             bulletPre = bulletType.tomatoPre;
             bulletType.curToppingType = ToppingType.Tomato;
+            skillDelay = 0f;//60f;
             Debug.Log("토핑 변경 (토마토)");
         }
     }
@@ -65,7 +78,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPre, bulletPos);
                 bullet.transform.SetParent(null);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(bulletDelay);
             }
 
             yield return null;
@@ -89,15 +102,30 @@ public class PlayerAttack : MonoBehaviour
         {
             if (bulletType.curToppingType == ToppingType.Cheese)
             {
-                StartCoroutine(CheeseSkill());
+                if(curDelay >= skillDelay)
+                {
+                    curDelay = 0f;
+                    uIManager.skillCoolDownImage.fillAmount = 1;
+                    StartCoroutine(CheeseSkill());
+                }
             }
             if (bulletType.curToppingType == ToppingType.Onion)
             {
-                OnionSkill();
+                if (curDelay >= skillDelay)
+                {
+                    curDelay = 0f;
+                    uIManager.skillCoolDownImage.fillAmount = 1;
+                    StartCoroutine(OnionSkill());
+                }
             }
             if (bulletType.curToppingType == ToppingType.Tomato)
             {
-                TomatoSkill();
+                if (curDelay >= skillDelay)
+                {
+                    curDelay = 0f;
+                    uIManager.skillCoolDownImage.fillAmount = 1;
+                    StartCoroutine(TomatoSkill());
+                }
             }
         }
     }
@@ -114,14 +142,22 @@ public class PlayerAttack : MonoBehaviour
         yield break;
     }
 
-    void OnionSkill()
+    IEnumerator OnionSkill()
     {
-
+        bulletDelay = 0.05f;
+        yield return new WaitForSeconds(10f);
+        bulletDelay = 0.1f;
+        yield break;
     }
 
-    void TomatoSkill()
+    IEnumerator TomatoSkill()
     {
-
+        if(enemyMove.hp <= 0)
+        {
+            enemyMove.Bake();
+        }
+        yield return new WaitForSeconds(10f);
+        yield break;
     }
 
 }

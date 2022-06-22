@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+
     [SerializeField] Image toppingIcon;
     [SerializeField] Sprite[] toppingImage;
     [SerializeField] TextMeshProUGUI finishedPizzaText;

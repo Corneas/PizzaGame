@@ -31,7 +31,6 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             FireBall();
-            uIManager.fireballCount--;
         }
     }
 
@@ -74,9 +73,13 @@ public class PlayerAttack : MonoBehaviour
 
     void FireBall()
     {
-        GameObject fireball = Instantiate(fireballPre, bulletPos);
-        fireball.transform.SetParent(null);
-        Destroy(fireball, 3f);
+        if(uIManager.fireballCount > 0)
+        {
+            uIManager.fireballCount--;
+            GameObject fireball = Instantiate(fireballPre, bulletPos);
+            fireball.transform.SetParent(null);
+            Destroy(fireball, 3f);
+        }
     }
 
 }

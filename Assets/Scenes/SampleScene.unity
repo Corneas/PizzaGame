@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pizzaDough: {fileID: 8704133094564883085, guid: c33c75e2eaf7a504fb15962767f3a18f, type: 3}
-  pizzaBossDough: {fileID: 7116375238865397805, guid: b388d9917051ad443a767a142808d41e, type: 3}
+  pizzaBossDough: {fileID: 1867201072341939222, guid: 52b8e4ac37db27a448a409adaab16312, type: 3}
   doughSpawnPoint:
   - {fileID: 2123653712}
   - {fileID: 389788133}
@@ -2389,6 +2389,7 @@ MonoBehaviour:
   fireballText: {fileID: 453185035}
   doughCountText: {fileID: 1135562151}
   skillCoolDownImage: {fileID: 1009403986}
+  countDownText: {fileID: 644612677}
   finishedPizza: 0
   fireballCount: 10
 --- !u!1 &1816024987

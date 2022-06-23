@@ -6,26 +6,38 @@ using TMPro;
 
 public class BossPizza : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI countDownText;
 
-    float countDownTimer = 120f;
+    private int hp = 200;
 
     private GameManager gameManager = null;
+    private UIManager uIManager = null;
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        countDownText.gameObject.SetActive(true);
+        uIManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
     {
-        if (gameManager.isBossSpawn)
-        {
-            countDownTimer -= Time.deltaTime;
-        }
 
-        countDownText.text = countDownTimer.ToString();
+        if(hp <= 0)
+        {
+            Dead();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Topping"))
+        {
+            hp--;
+        }
+    }
+
+    private void Dead()
+    {
+        Destroy(gameObject);
+        uIManager.fireballCount += 10;
     }
 }

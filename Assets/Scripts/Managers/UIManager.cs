@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI doughCountText;
     public Image skillCoolDownImage;
 
+    [SerializeField]
+    private TextMeshProUGUI countDownText;
+    public float countDownTimer { private set; get; } = 120f;
 
     private BulletType bulletType = null;
     public int finishedPizza = 0;
@@ -40,6 +43,18 @@ public class UIManager : MonoBehaviour
         skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
         skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
         skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
+
+        if (gameManager.isBossSpawn)
+        {
+            countDownText.gameObject.SetActive(true);
+
+            countDownTimer -= Time.deltaTime;
+            countDownText.text = $"{countDownTimer:F2}";
+        }
+        else
+        {
+            countDownText.gameObject.SetActive(false);
+        }
     }
 
     void ChangeImage()

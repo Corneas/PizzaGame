@@ -24,8 +24,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnBossPizza());
         StartCoroutine(SpawnDough());
+    }
+
+    private void Update()
+    {
+        SpawnBossPizza();
     }
 
     IEnumerator SpawnDough()
@@ -40,23 +44,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnBossPizza()
+    void SpawnBossPizza()
     {
-        if (totalDoughCount == 0)
+        if(totalDoughCount % 20 == 0 && !isBossSpawn && totalDoughCount != 0)
         {
             GameObject Boss = Instantiate(pizzaBossDough, bossDoughSpawnPoint);
-            while(Boss.transform.position.y <= 20f)
-            {
-                Boss.transform.Translate(Vector3.up);
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
+            //while(Boss.transform.position.y <= 20f)
+            //{
+            //    Boss.transform.Translate(Vector3.up);
+            //    yield return new WaitForSeconds(0.1f);
+            //}
 
-        isBossSpawn = true;
+            isBossSpawn = true;
+        }
     }
 
-    public void Dead()
+    public void GameOver()
     {
-
+        Time.timeScale = 0;
+        isBossSpawn = false;
+        Debug.Log("게임오버");
     }
 }

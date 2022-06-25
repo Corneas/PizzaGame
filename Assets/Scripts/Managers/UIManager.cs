@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI finishedPizzaText;
     [SerializeField] TextMeshProUGUI fireballText;
     [SerializeField] TextMeshProUGUI doughCountText;
+    [SerializeField] GameObject gameOverPanel;
     public Image skillCoolDownImage;
 
     [SerializeField]
@@ -46,6 +47,10 @@ public class UIManager : MonoBehaviour
 
         if (gameManager.isBossSpawn)
         {
+            if (countDownTimer <= 0)
+            {
+                ActiveGameOverPanel();
+            }
             countDownText.gameObject.SetActive(true);
 
             countDownTimer -= Time.deltaTime;
@@ -53,6 +58,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            countDownTimer = 120f;
             countDownText.gameObject.SetActive(false);
         }
     }
@@ -71,5 +77,11 @@ public class UIManager : MonoBehaviour
                 toppingIcon.sprite = toppingImage[2];
                 break;
         }
+    }
+
+    void ActiveGameOverPanel()
+    {
+        gameManager.SendMessage("GameOver");
+        gameOverPanel.SetActive(true);
     }
 }

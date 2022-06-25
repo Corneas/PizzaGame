@@ -7,7 +7,7 @@ using TMPro;
 public class BossPizza : MonoBehaviour
 {
 
-    private int hp = 200;
+    private int hp = 500;
 
     private GameManager gameManager = null;
     private UIManager uIManager = null;
@@ -38,6 +38,7 @@ public class BossPizza : MonoBehaviour
     private void Dead()
     {
         Destroy(gameObject);
+        gameManager.isBossSpawn = false;
         uIManager.fireballCount += 10;
     }
 }

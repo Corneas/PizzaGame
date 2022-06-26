@@ -9,6 +9,9 @@ public class BossPizza : MonoBehaviour
 
     private int hp = 500;
 
+    [SerializeField]
+    private Animator animator = null;
+
     private GameManager gameManager = null;
     private UIManager uIManager = null;
 

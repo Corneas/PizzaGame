@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - FireBall
   - Topping
+  - None
+  - Tomato
   layers:
   - Default
   - TransparentFX

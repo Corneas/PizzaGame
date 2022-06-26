@@ -65,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
         {
             bulletPre = bulletType.tomatoPre;
             bulletType.curToppingType = ToppingType.Tomato;
-            skillDelay = 20f;//60f;
+            skillDelay = 3f;//60f;
             Debug.Log("토핑 변경 (토마토)");
         }
     }
@@ -154,8 +154,15 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator TomatoSkill()
     {
-
-        yield break;
+        for (int i = -45; i <= 45f; i += 15) 
+        {
+            GameObject tomato = Instantiate(bulletPre, bulletPos);
+            tomato.tag = "Tomato";
+            tomato.transform.Rotate(new Vector3(0, i, 0));
+            tomato.transform.localScale = tomato.transform.localScale * 5f;
+            tomato.transform.SetParent(null);
+        }
+            yield break;
     }
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI fireballText;
     [SerializeField] TextMeshProUGUI doughCountText;
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject pausePanel;
     public Image skillCoolDownImage;
 
     [SerializeField]
@@ -25,6 +27,8 @@ public class UIManager : MonoBehaviour
 
     private GameManager gameManager = null;
     private PlayerAttack playerAttack = null;
+
+    private bool isPause = false;
 
     private void Start()
     {
@@ -61,6 +65,28 @@ public class UIManager : MonoBehaviour
             countDownTimer = 120f;
             countDownText.gameObject.SetActive(false);
         }
+
+        TogglePausePanel();
+    }
+
+    void TogglePausePanel()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPause = !isPause;
+            pausePanel.SetActive(!pausePanel.activeSelf);
+            if (isPause)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+
+            MouseManager.Show(isPause);
+            MouseManager.Lock(!isPause);
+        }
     }
 
     void ChangeImage()
@@ -84,4 +110,20 @@ public class UIManager : MonoBehaviour
         gameManager.SendMessage("GameOver");
         gameOverPanel.SetActive(true);
     }
+
+    public void Resume()
+    {
+        isPause = false;
+        Time.timeScale = 1f;
+        MouseManager.Show(false);
+        MouseManager.Lock(true);
+        pausePanel.SetActive(false);
+    }
+
+    public void Home()
+    {
+        SceneManager.LoadScene("TitleScene");
+        Time.timeScale = 1f;
+    }
+
 }

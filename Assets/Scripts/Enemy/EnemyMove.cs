@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class EnemyMove : MonoBehaviour
     private GameManager gameManager = null;
     private MeshRenderer meshRenderer = null;
     private PlayerAttack playerAttack = null;
+    private NavMeshAgent agent = null;
 
     void Start()
     {
@@ -26,14 +28,24 @@ public class EnemyMove : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         playerAttack = FindObjectOfType<PlayerAttack>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        if(Vector3.Distance(target.transform.position, transform.position) >= 1f)
+        agent.SetDestination(target.transform.position);
+
+        if(agent.remainingDistance >= 1.0f)
         {
-            transform.LookAt(target.transform);
-            transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
+
+            Vector3 direction = agent.desiredVelocity;
+
+            Quaternion rot = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 10.0f);
+
+            //agent.SetDestination(target.transform.position);
+            //agent.isStopped = false;
         }
         
         if(hp <= 0)
@@ -50,7 +62,16 @@ public class EnemyMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Topping"))
         {
+            Destroy(other.gameObject);
             if(hp > 0)
+            {
+                hp--;
+            }
+        }
+
+        if (other.gameObject.CompareTag("Tomato"))
+        {
+            if (hp > 0)
             {
                 hp--;
             }
@@ -59,6 +80,7 @@ public class EnemyMove : MonoBehaviour
         if (other.gameObject.CompareTag("FireBall"))
         {
             Bake();
+            Destroy(other.gameObject);
         }
     }
 
@@ -68,7 +90,7 @@ public class EnemyMove : MonoBehaviour
         gameManager.curDoughCount--;
         if (hp <= 0)
         {
-            pizzaObj = Instantiate(pizza, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
+            pizzaObj = Instantiate(pizza, new Vector3(transform.position.x, transform.position.y - 0.8f, transform.position.z), Quaternion.identity);
         }
     }
 }

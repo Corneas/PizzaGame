@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 7637697868791185772}
   - component: {fileID: 4996422015155962754}
   - component: {fileID: 5180709560500777467}
+  - component: {fileID: 136904831}
   m_Layer: 0
   m_Name: pizza
   m_TagString: Pizza
@@ -160,3 +161,25 @@ MonoBehaviour:
   moveSpeed: 5
   pizza: {fileID: 5770755426908443793, guid: 029b5c3b428407641acfdd9a1632b78c, type: 3}
   material: {fileID: 382224095092679573, guid: a0346759146c5934cbdd5ec73a404a5e, type: 3}
+--- !u!195 &136904831
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704133094564883085}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 2.4
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 5
+  m_BaseOffset: 2.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

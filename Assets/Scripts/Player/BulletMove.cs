@@ -19,7 +19,7 @@ public class BulletMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pizza") || other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }

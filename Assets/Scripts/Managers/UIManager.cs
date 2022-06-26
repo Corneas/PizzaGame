@@ -71,6 +71,11 @@ public class UIManager : MonoBehaviour
             countDownText.gameObject.SetActive(false);
         }
 
+
+        if(playerController.hp <= 0)
+        {
+            ActiveGameOverPanel();
+        }
         TogglePausePanel();
     }
 
@@ -84,7 +89,7 @@ public class UIManager : MonoBehaviour
             {
                 Time.timeScale = 0f;
             }
-            else
+            else if(!isPause)
             {
                 Time.timeScale = 1f;
             }
@@ -127,8 +132,10 @@ public class UIManager : MonoBehaviour
 
     public void Home()
     {
-        SceneManager.LoadScene("TitleScene");
         Time.timeScale = 1f;
+        MouseManager.Show(true);
+        MouseManager.Lock(false);
+        SceneManager.LoadScene("TitleScene");
     }
 
 }

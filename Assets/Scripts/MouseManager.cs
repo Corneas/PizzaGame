@@ -11,7 +11,7 @@ public class MouseManager : MonoBehaviour
 
     public static void Show(bool isShow)
     {
-        Cursor.visible = false;
+        Cursor.visible = isShow;
     }
 
 }

@@ -10,6 +10,7 @@ TagManager:
   - Topping
   - None
   - Tomato
+  - BossBullet
   layers:
   - Default
   - TransparentFX

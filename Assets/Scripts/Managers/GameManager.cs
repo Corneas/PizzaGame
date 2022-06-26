@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     void SpawnBossPizza()
     {
-        if(totalDoughCount % 20  == 0 && !isBossSpawn && totalDoughCount != 0)
+        if(totalDoughCount % 2 == 0 && !isBossSpawn && totalDoughCount != 0)
         {
             GameObject Boss = Instantiate(pizzaBossDough, bossDoughSpawnPoint);
             //while(Boss.transform.position.y <= 20f)

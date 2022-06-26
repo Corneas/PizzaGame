@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject playerObject = null;
+
+    public int hp { get; private set; } = 20;
+
     void Start()
     {
         MouseManager.Lock(true);
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
+
+        Vector3 playerPos = transform.localPosition;
 
         Vector3 dir = Vector3.right * h + Vector3.forward * v;
         dir = Camera.main.transform.TransformDirection(dir);
@@ -58,5 +63,13 @@ public class PlayerController : MonoBehaviour
         rotateX = Mathf.Clamp(rotateX, -80f, 80f);
 
         playerObject.transform.rotation = Quaternion.Euler(new Vector3(-rotateX, rotateY, 0));
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("BossBullet"))
+        {
+            hp--;
+        }
     }
 }

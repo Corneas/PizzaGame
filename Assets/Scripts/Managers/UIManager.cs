@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI doughCountText;
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject pausePanel;
+    [SerializeField] Slider playerHP;
     public Image skillCoolDownImage;
 
     [SerializeField]
@@ -27,6 +28,7 @@ public class UIManager : MonoBehaviour
 
     private GameManager gameManager = null;
     private PlayerAttack playerAttack = null;
+    private PlayerController playerController = null;
 
     private bool isPause = false;
 
@@ -35,11 +37,14 @@ public class UIManager : MonoBehaviour
         bulletType = FindObjectOfType<BulletType>();
         gameManager = FindObjectOfType<GameManager>();
         playerAttack = FindObjectOfType<PlayerAttack>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     private void Update()
     {
         ChangeImage();
+
+        playerHP.value = playerController.hp * 0.05f;
 
         finishedPizzaText.text = "완성된 피자 : " + finishedPizza.ToString();
         fireballText.text = "남은 화염구 개수 : " + fireballCount.ToString();

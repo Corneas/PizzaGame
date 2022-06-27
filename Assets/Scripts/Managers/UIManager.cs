@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI countDownText;
-    public float countDownTimer { private set; get; } = 120f;
+    public float countDownTimer = 120f;
 
     private BulletType bulletType = null;
     public int finishedPizza = 0;

@@ -51,6 +51,7 @@ public class BossPizza : MonoBehaviour
     {
         Destroy(gameObject);
         gameManager.isBossSpawn = false;
+        uIManager.countDownTimer = 120f;
         uIManager.fireballCount += 10;
     }
 
@@ -59,12 +60,12 @@ public class BossPizza : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(4f);
 
             if (pattern == 0)
             {
                 List<BossBulletMove> bossBulletMoves = new List<BossBulletMove>();
-                for (int i = 0; i <= 180; i += 15)
+                for (int i = 0; i <= 180; i += 6)
                 {
                     var bullet = Instantiate(bulletPre, bulletPos.position, Quaternion.Euler(-i, 90, 0));
                     bossBulletMoves.Add(bullet.GetComponent<BossBulletMove>());
@@ -87,7 +88,7 @@ public class BossPizza : MonoBehaviour
 
         for (int i = 0; i < bossBulletMoves.Length; i++)
         {
-            bossBulletMoves[i].bulletSpeed = 30f;
+            bossBulletMoves[i].bulletSpeed = 50f;
         }
 
         foreach (var bulletItem in bossBulletMoves)

@@ -152,15 +152,20 @@ public class PlayerAttack : MonoBehaviour
         yield break;
     }
 
+    int random;
+    float randomSpeed = 0;
     IEnumerator TomatoSkill()
     {
-        for (int i = -45; i <= 45f; i += 15) 
+        for (int i = 0; i < 8; i++) 
         {
             GameObject tomato = Instantiate(bulletPre, bulletPos);
             tomato.tag = "Tomato";
-            tomato.transform.Rotate(new Vector3(0, i, 0));
+            random = Random.Range(-45, 45);
+            randomSpeed = Random.Range(10f, 20f);
+            tomato.transform.Rotate(new Vector3(0, random, 0));
             tomato.transform.localScale = tomato.transform.localScale * 5f;
             tomato.transform.SetParent(null);
+            tomato.GetComponent<BulletMove>().speed = randomSpeed;
         }
             yield break;
     }

@@ -17,14 +17,12 @@ public class PlayerAttack : MonoBehaviour
     public float curDelay { private set; get; } = 0;
 
     private BulletType bulletType = null;
-    private UIManager uIManager = null;
 
     public bool isTomatoSkillOn = false;
 
     private void Awake()
     {
         bulletType = GetComponent<BulletType>();
-        uIManager = FindObjectOfType<UIManager>();
     }
 
     void Start()
@@ -87,9 +85,9 @@ public class PlayerAttack : MonoBehaviour
 
     void FireBall()
     {
-        if(uIManager.fireballCount > 0)
+        if(UIManager.Instance.fireballCount > 0)
         {
-            uIManager.fireballCount--;
+            UIManager.Instance.fireballCount--;
             GameObject fireball = Instantiate(fireballPre, bulletPos);
             fireball.transform.SetParent(null);
             Destroy(fireball, 3f);
@@ -105,7 +103,7 @@ public class PlayerAttack : MonoBehaviour
                 if(curDelay >= skillDelay)
                 {
                     curDelay = 0f;
-                    uIManager.skillCoolDownImage.fillAmount = 1;
+                    UIManager.Instance.skillCoolDownImage.fillAmount = 1;
                     StartCoroutine(CheeseSkill());
                 }
             }
@@ -114,7 +112,7 @@ public class PlayerAttack : MonoBehaviour
                 if (curDelay >= skillDelay)
                 {
                     curDelay = 0f;
-                    uIManager.skillCoolDownImage.fillAmount = 1;
+                    UIManager.Instance.skillCoolDownImage.fillAmount = 1;
                     StartCoroutine(OnionSkill());
                 }
             }
@@ -123,7 +121,7 @@ public class PlayerAttack : MonoBehaviour
                 if (curDelay >= skillDelay)
                 {
                     curDelay = 0f;
-                    uIManager.skillCoolDownImage.fillAmount = 1;
+                    UIManager.Instance.skillCoolDownImage.fillAmount = 1;
                     StartCoroutine(TomatoSkill());
                 }
             }

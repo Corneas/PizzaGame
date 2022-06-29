@@ -18,14 +18,9 @@ public class BossPizza : MonoBehaviour
     [SerializeField]
     private Animator animator = null;
 
-    private GameManager gameManager = null;
-    private UIManager uIManager = null;
-
     private void Awake()
     {
         target = GameObject.Find("PizzaTarget");
-        gameManager = FindObjectOfType<GameManager>();
-        uIManager = FindObjectOfType<UIManager>();
         animator.SetTrigger("SpawnBoss");
         StartCoroutine(BossSkill());
     }
@@ -50,9 +45,9 @@ public class BossPizza : MonoBehaviour
     private void Dead()
     {
         Destroy(gameObject);
-        gameManager.isBossSpawn = false;
-        uIManager.countDownTimer = 120f;
-        uIManager.fireballCount += 10;
+        GameManager.Instance.isBossSpawn = false;
+        UIManager.Instance.countDownTimer = 120f;
+        UIManager.Instance.fireballCount += 10;
     }
 
     int pattern = 0;

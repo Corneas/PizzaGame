@@ -22,6 +22,13 @@ public class BulletMove : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
+            //ToppingDespawn();
         }
     }
+
+    //private void ToppingDespawn()
+    //{
+    //    transform.SetParent(PoolManager.Instance.playerTopping.transform, false);
+    //    gameObject.SetActive(false);
+    //}
 }

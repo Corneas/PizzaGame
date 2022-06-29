@@ -17,7 +17,6 @@ public class EnemyMove : MonoBehaviour
 
     public int hp { private set; get; } = 10;
 
-    private GameManager gameManager = null;
     private MeshRenderer meshRenderer = null;
     private PlayerAttack playerAttack = null;
     private NavMeshAgent agent = null;
@@ -25,7 +24,6 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("PizzaTarget");
-        gameManager = FindObjectOfType<GameManager>();
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         playerAttack = FindObjectOfType<PlayerAttack>();
         agent = GetComponent<NavMeshAgent>();
@@ -87,7 +85,7 @@ public class EnemyMove : MonoBehaviour
     public void Bake()
     {
         Destroy(gameObject);
-        gameManager.curDoughCount--;
+        GameManager.Instance.curDoughCount--;
         if (hp <= 0)
         {
             pizzaObj = Instantiate(pizza, new Vector3(transform.position.x, transform.position.y - 0.8f, transform.position.z), Quaternion.identity);

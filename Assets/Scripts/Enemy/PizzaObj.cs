@@ -7,12 +7,9 @@ public class PizzaObj : MonoBehaviour
     [SerializeField]
     private GameObject target;
 
-    [SerializeField]
-    private UIManager uimanager;
     private void Start()
     {
         target = GameObject.Find("PizzaTarget");
-        uimanager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
@@ -22,7 +19,7 @@ public class PizzaObj : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Destroy(gameObject);
-                uimanager.finishedPizza++;
+                UIManager.Instance.finishedPizza++;
             }
         }
     }

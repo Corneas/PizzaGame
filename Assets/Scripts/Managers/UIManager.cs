@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoSingleton<UIManager>
 {
 
     [SerializeField] Image toppingIcon;
@@ -26,7 +26,6 @@ public class UIManager : MonoBehaviour
     public int finishedPizza = 0;
     public int fireballCount = 10;
 
-    private GameManager gameManager = null;
     private PlayerAttack playerAttack = null;
     private PlayerController playerController = null;
 
@@ -35,7 +34,6 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         bulletType = FindObjectOfType<BulletType>();
-        gameManager = FindObjectOfType<GameManager>();
         playerAttack = FindObjectOfType<PlayerAttack>();
         playerController = FindObjectOfType<PlayerController>();
     }
@@ -48,13 +46,13 @@ public class UIManager : MonoBehaviour
 
         finishedPizzaText.text = "완성된 피자 : " + finishedPizza.ToString();
         fireballText.text = "남은 화염구 개수 : " + fireballCount.ToString();
-        doughCountText.text = "현재 적 수 : " + gameManager.curDoughCount.ToString();
+        doughCountText.text = "현재 적 수 : " + GameManager.Instance.curDoughCount.ToString();
 
         skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
         skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
         skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
 
-        if (gameManager.isBossSpawn)
+        if (GameManager.Instance.isBossSpawn)
         {
             if (countDownTimer <= 0)
             {
@@ -117,7 +115,7 @@ public class UIManager : MonoBehaviour
 
     void ActiveGameOverPanel()
     {
-        gameManager.SendMessage("GameOver");
+        GameManager.Instance.SendMessage("GameOver");
         gameOverPanel.SetActive(true);
     }
 

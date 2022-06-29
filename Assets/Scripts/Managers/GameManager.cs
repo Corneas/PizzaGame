@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
     [Header("PizzaDough")]
     [SerializeField]
@@ -22,8 +22,11 @@ public class GameManager : MonoBehaviour
 
     public bool isBossSpawn = false;
 
+    public PoolManager poolManager = null;
+
     private void Start()
     {
+        poolManager = FindObjectOfType<PoolManager>();
         StartCoroutine(SpawnDough());
     }
 
@@ -63,6 +66,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         isBossSpawn = false;
+        MouseManager.Lock(false);
+        MouseManager.Show(true);
         Debug.Log("게임오버");
     }
 }

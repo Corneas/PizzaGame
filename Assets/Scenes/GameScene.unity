@@ -7800,9 +7800,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c282b97dbfa82cf4085773cea1cb651a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cheesePre: {fileID: 77993913108532801, guid: 676d7732b68fbb9479a30745c877317a, type: 3}
-  pepperoniPre: {fileID: 820363194127961226, guid: ae7e3ee579d27024bb23675ce4408f20, type: 3}
-  tomatoPre: {fileID: 8130623073676028489, guid: 1f4ec6caad20b0040bbd9c54ea8a4df3, type: 3}
+  toppingPre:
+  - {fileID: 77993913108532801, guid: 676d7732b68fbb9479a30745c877317a, type: 3}
+  - {fileID: 820363194127961226, guid: ae7e3ee579d27024bb23675ce4408f20, type: 3}
+  - {fileID: 8130623073676028489, guid: 1f4ec6caad20b0040bbd9c54ea8a4df3, type: 3}
   curToppingType: 0
 --- !u!1001 &328227988
 PrefabInstance:

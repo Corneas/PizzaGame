@@ -28,6 +28,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         poolManager = FindObjectOfType<PoolManager>();
         StartCoroutine(SpawnDough());
+
+        //if(Time.timeScale == 0f)
+        //{
+        //    Time.timeScale = 1f;
+        //}
     }
 
     private void Update()

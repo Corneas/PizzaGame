@@ -90,6 +90,6 @@ public class BossPizza : MonoBehaviour
         {
             bulletItem.transform.LookAt(target.transform);
         }
-        yield return null;
+        yield break;
     }
 }

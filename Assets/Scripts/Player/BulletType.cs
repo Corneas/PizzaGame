@@ -11,8 +11,6 @@ public enum ToppingType
 
 public class BulletType : MonoBehaviour
 {
-    public GameObject cheesePre = null;
-    public GameObject pepperoniPre = null;
-    public GameObject tomatoPre = null;
+    public GameObject[] toppingPre = null;
     public ToppingType curToppingType = 0;
 }

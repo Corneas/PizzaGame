@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TitleManager : MonoBehaviour
+public class TitleManager : MonoSingleton<TitleManager>
 {
     [SerializeField] GameObject HelpPanel;
 

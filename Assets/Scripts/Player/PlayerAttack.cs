@@ -34,10 +34,6 @@ public class PlayerAttack : MonoBehaviour
     {
         ChangeToppingType();
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            FireBall();
-        }
         Skill();
 
         curDelay += Time.deltaTime;
@@ -47,36 +43,42 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            bulletPre = bulletType.cheesePre;
-            bulletType.curToppingType = ToppingType.Cheese;
-            skillDelay = 3f;
-            Debug.Log("토핑 변경 (치즈)");
+            ChangeTopping(ToppingType.Cheese);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            bulletPre = bulletType.pepperoniPre;
-            bulletType.curToppingType = ToppingType.Pepperoni;
-            skillDelay = 3f;//30f;
-            Debug.Log("토핑 변경 (페퍼로니)");
+            ChangeTopping(ToppingType.Pepperoni);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            bulletPre = bulletType.tomatoPre;
-            bulletType.curToppingType = ToppingType.Tomato;
-            skillDelay = 3f;//60f;
-            Debug.Log("토핑 변경 (토마토)");
+            ChangeTopping(ToppingType.Tomato);
         }
+    }
+
+    private void ChangeTopping(ToppingType type)
+    {
+        bulletPre = bulletType.toppingPre[(int)type];
+        bulletType.curToppingType = type;
+        skillDelay = 3f;
+        Debug.Log("토핑 변경 " + type);
     }
 
     IEnumerator Fire()
     {
         while (true)
         {
+            // if (UIManager.Instance.isPause) continue;
+
             if (Input.GetMouseButton(0))
             {
                 GameObject bullet = Instantiate(bulletPre, bulletPos);
                 bullet.transform.SetParent(null);
                 yield return new WaitForSeconds(bulletDelay);
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                FireBall();
             }
 
             yield return null;

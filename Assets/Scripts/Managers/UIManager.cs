@@ -29,7 +29,7 @@ public class UIManager : MonoSingleton<UIManager>
     private PlayerAttack playerAttack = null;
     private PlayerController playerController = null;
 
-    private bool isPause = false;
+    public bool isPause { get; private set; } = false;
 
     private void Start()
     {
@@ -48,8 +48,6 @@ public class UIManager : MonoSingleton<UIManager>
         fireballText.text = "남은 화염구 개수 : " + fireballCount.ToString();
         doughCountText.text = "현재 적 수 : " + GameManager.Instance.curDoughCount.ToString();
 
-        skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
-        skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
         skillCoolDownImage.fillAmount = (playerAttack.skillDelay - playerAttack.curDelay) / playerAttack.skillDelay;
 
         if (GameManager.Instance.isBossSpawn)
@@ -87,7 +85,7 @@ public class UIManager : MonoSingleton<UIManager>
             {
                 Time.timeScale = 0f;
             }
-            else if(!isPause)
+            else if (!isPause)
             {
                 Time.timeScale = 1f;
             }
